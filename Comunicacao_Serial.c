@@ -161,7 +161,7 @@ void desenhar_numero(int num, PIO pio, uint sm)
     for (int i = 0; i < NUM_PIXELS; i++)
     {
         int indice_fisico = ordem_fisica[i];
-        led_buffer[i] = numeros[num][indice_fisico] ? matrix_rgb(1.0, 0.0, 0.0) : matrix_rgb(0.0, 0.0, 0.0);
+        led_buffer[i] = numeros[num][indice_fisico] ? matrix_rgb(0.0, 1.0, 1.0) : matrix_rgb(0.0, 0.0, 0.0);
     }
         
     // Envia os dados da matriz para os LEDs WS2812
@@ -215,12 +215,16 @@ void atualizar_led_e_display(ssd1306_t *ssd, int led_pin, const char *led_name, 
     // Exibe no display qual botão foi pressionado
     char message[32];
     ssd1306_fill(ssd, false);
-    sprintf(message, "Botao %s", btn_name);
-    ssd1306_draw_string(ssd, message, 10, 10);
+    sprintf(message, "Botao %s\n", btn_name);
+    ssd1306_draw_string(ssd, message, 5, 5);
 
-    // Exibe o estado do LED correspondente
-    sprintf(message, "LED %s/n: %s", led_name, led_state ? "Ligado" : "Desligado");
-    ssd1306_draw_string(ssd, message, 10, 20);
+    // Exibe o LED correspondente
+    sprintf(message, "LED %s:\n", led_name);
+    ssd1306_draw_string(ssd, message, 5, 20);
+
+    // Exibe o estado do LED 
+    sprintf(message, "%s", led_state ? "Ligado" : "Desligado");
+    ssd1306_draw_string(ssd, message, 5, 35);
 
     ssd1306_send_data(ssd);
 }
@@ -229,6 +233,7 @@ void atualizar_led_e_display(ssd1306_t *ssd, int led_pin, const char *led_name, 
 absolute_time_t last_press_time_A = {0};
 absolute_time_t last_press_time_B = {0};
 
+// Detecta quando um botão é pressionado e alterna o estado do LED correspondente
 void btn_irq_handler(uint gpio, uint32_t events)
 {
     absolute_time_t now = get_absolute_time();
@@ -243,7 +248,7 @@ void btn_irq_handler(uint gpio, uint32_t events)
             gpio_put(LED_GREEN, led_green_state);
 
             // Mensagem única no Serial Monitor
-            printf("Botao A pressionado. LED Verde %s/n", led_green_state ? "Ligado" : "Desligado");
+            printf("Botao A pressionado. LED Verde %s\n", led_green_state ? "Ligado" : "Desligado");
 
             // Atualiza o display sem imprimir novamente no Serial Monitor
             atualizar_led_e_display(&ssd, LED_GREEN, "Verde", "A", led_green_state);
@@ -259,7 +264,7 @@ void btn_irq_handler(uint gpio, uint32_t events)
             gpio_put(LED_BLUE, led_blue_state);
 
             // Mensagem única no Serial Monitor
-            printf("Botao B pressionado. LED Azul %s/n", led_blue_state ? "Ligado" : "Desligado");
+            printf("Botao B pressionado. LED Azul %s\n", led_blue_state ? "Ligado" : "Desligado");
 
             // Atualiza o display sem imprimir novamente no Serial Monitor
             atualizar_led_e_display(&ssd, LED_BLUE, "Azul", "B", led_blue_state);
