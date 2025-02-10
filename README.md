@@ -4,7 +4,7 @@ Unidade 4 - Capítulo 6
 
 Este projeto explora o uso de interfaces de comunicação serial no RP2040, utilizando a placa de desenvolvimento BitDogLab. O foco está na manipulação de LEDs comuns e endereçáveis, botões com interrupções e debounce, além da exibição de caracteres em um display OLED via I2C. 
 
-O código é escrito em C e executado no Raspberry Pi Pico W, integrando hardware e software para proporcionar uma experiência prática no uso de UART e I2C. A simulação pode ser realizada na ferramenta Wokwi integrada ao VS Code.
+O código é escrito em C e executado no Raspberry Pi Pico W, integrando hardware e software para proporcionar uma experiência prática no uso de UART e I2C. A simulação támbém pode ser realizada na ferramenta Wokwi integrada ao VS Code.
 
 ## Componentes Utilizados
 
@@ -62,3 +62,7 @@ O código é escrito em C e executado no Raspberry Pi Pico W, integrando hardwar
 3. Pressione os botões e observe a resposta no display e no Serial Monitor.
 4. Insira caracteres pelo Serial Monitor e veja-os aparecer no display SSD1306.
 5. Digite números para exibir símbolos na matriz 5x5 de LEDs WS2812.
+
+## Vídeo demonstrativo
+
+[![Vídeo de Demonstração](https://img.shields.io/badge/Assistir-Vídeo-blue)](https://drive.google.com/file/d/1IqLRyAUeAaNotv2emy0Au0p5au5248uH/view?usp=sharing)
